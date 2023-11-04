@@ -7,8 +7,8 @@ var KPSpeed = (function() {
     var globalInterval;
     var inProgress = false;
     var request;
-    var rand = ('0' + getRandomInt(14, 14)).slice(-2);
-    var rand2 = ('0' + getRandomInt(4, 4)).slice(-2); // TODO: random range?
+    var rand = ('0' + getRandomInt(12, 15)).slice(-2);
+    var rand2 = ('0' + getRandomInt(5, 6)).slice(-2);
 
     var SPEEDTEST_SERVERS = [{
             name: "ams",
