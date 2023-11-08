@@ -20,7 +20,7 @@ const KINOPUB = {
     apiBaseExt: "https://kinopub.link/v1.1/",
     apiBaseExt2: "https://kpserver.link/api2/v1.1/",
     actorImgUrl: "https://kpserver.link/cdn/actors/",
-    oldCdnUrl: null,
+    oldCdnUrl: 'https://cdn.service-kp.com/',
     cdnUrl: "https://kpserver.link/cdn/",
     clientID: "appletv2",
     clientSecret: "3z5124kj5liqy9gahnjr07qpj65ferl2"

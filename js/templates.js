@@ -682,7 +682,7 @@ var Templates = {
         },
         kpChannels(channel) {
             return `<lockup onselect="KPlayer.playTV('${channel.stream}', ' ${channel.title}', '${channel.logos.s}')">
-                        <img src ="${channel.logos.s}" width="160" height="120" />
+                        <img src ="${Utils.replaceCdn(channel.logos.s)}" width="160" height="120" />
                         <title>${channel.title}</title>
                     </lockup>`;
         },
