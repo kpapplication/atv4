@@ -51,6 +51,15 @@ var Ajax = (function() {
                 callback(xhr);
             }
             Utils.remove(requests, xhr);
+
+            try {
+                var json = JSON.parse(xhr.responseText);
+                if (json && json.error) {
+                    Log.sendSentry(`[${method}] ${url} ${xhr.status}: ${xhr.responseText}`, xhr);
+                }
+            } catch (e) {
+                // ignore
+            }
         };
         xhr.onerror = function() {
             console.log('error status: ' + xhr.status + ' ' + xhr.responseText);
@@ -58,6 +67,8 @@ var Ajax = (function() {
                 callback(xhr);
             }
             Utils.remove(requests, xhr);
+
+            Log.sendSentry(`[${method}] ${url} ${xhr.status}: ${xhr.responseText}`, xhr);
         };
         if (postBody) { xhr.send(postBody); } else { xhr.send(); }
         return xhr;

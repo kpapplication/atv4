@@ -15,6 +15,16 @@ var Network = (function() {
         doc.error = true;
     }
 
+    function showErrorMessage(message) {
+        var buttons = '<button onselect="Network.retry()"><text>Повторить</text></button>';
+        var desc = message;
+        console.log(desc)
+        var template = Templates.alert("Ошибка", desc, buttons);
+        var doc = Presenter.makeDocument(template, true);
+        if (getActiveDocument().error) { Presenter.replaceDocument(doc); } else { Presenter.pushDocument(doc); }
+        doc.error = true;
+    }
+
     return {
         loadItemsFrom(options, callback, skipCache = false) {
             var page = options.page || 0
@@ -38,8 +48,16 @@ var Network = (function() {
                     if (!Auth.check()) { showActivationPage(); }
                 } else if (status == 200) {
                     var result = xhr.responseText ? JSON.parse(xhr.responseText) : xhr;
-                    Cache.set(key, result, 60);
-                    if (callback) { callback(result, options) }
+
+                    if (xhr.responseText && typeof result.error !== 'undefined') {
+                        retryRequests.push({'options' : options, 'callback' : callback})
+                        Ajax.abortAll();
+                        showErrorMessage(result.error)
+                        if (callback) { callback(null, null, xhr) }
+                    } else {
+                        Cache.set(key, result, 60);
+                        if (callback) { callback(result, options) }
+                    }
                 } else {
                     retryRequests.push({'options' : options, 'callback' : callback})
                     Ajax.abortAll();
