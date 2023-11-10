@@ -1416,10 +1416,12 @@ var KP = (function() {
                         Presenter.dismissModal();
                     } else if (selectedElement.tagName == "button" && targetElement) {
                         Network.loadItemsFrom(itemsToLoad[targetElement], deleteHistory, true);
+                        Presenter.dismissModal();
                     }
                 } else {
                     if (selectedElement.tagName == "button" && targetElement == 1) {
                         Network.loadItemsFrom(itemsToLoad[1], deleteHistory, true);
+                        Presenter.dismissModal();
                     } else if (selectedElement.tagName == "button" && targetElement == 0) {
                         Presenter.dismissModal();
                     }
