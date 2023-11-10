@@ -6,15 +6,16 @@ var AppStorage = {
 		if (!userDefaultsValue && localStorageValue) {
 			// migrate to userDefaults (temporary)
 			userDefaults.setData("localStorage_" + key, localStorageValue);
+			localStorage.removeItem(key);
 		}
 
 		return userDefaultsValue || localStorageValue;
-		// return localStorage.getItem(key);
 	},
 
 	setItem: function(key, value) {
+		// migrate to userDefaults (temporary)
+		localStorage.removeItem(key);
 		return userDefaults.setData("localStorage_" + key, value);
-		// return localStorage.setItem(key, value);
     },
     
     getData: function(key) {
@@ -30,6 +31,8 @@ var AppStorage = {
 	},
 	
 	removeItem: function(key) {
-		return localStorage.removeItem(key);
+		// migrate to userDefaults (temporary)
+		localStorage.removeItem(key)
+		return userDefaults.removeData(key);
 	}
 }
