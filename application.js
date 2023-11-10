@@ -1,5 +1,5 @@
 var baseURL;
-var APP_VERSION = "1.55.0";
+var APP_VERSION = "1.56.0";
 var MenuItemDoc;
 var cachedResult;
 var globalCheckAuthInterval;
@@ -116,14 +116,6 @@ App.onLaunch = function(options) {
     if (typeof navigationDocument !== undefined) {
         navigationDocument.pushDocument(loadingDocument);
     }
-
-    // evaluateScripts(['https://js.sentry-cdn.com/5e467c6ae664f701f456334463aabc1f.min.js'], function(success) {
-    //     if (success) {
-    //         console.log('Sentry loaded');
-    //     } else {
-    //         console.log('Sentry failed to load');
-    //     }
-    // });
 
     evaluateScripts(javascriptFiles, function(success) {
         if (success) {

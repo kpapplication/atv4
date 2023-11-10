@@ -151,14 +151,35 @@ var KPlayer = (function() {
             }
             var _item = (shuffle) ? shuffled : item
             console.log('sIndex' + season + 'eIndex' + episode);
-            var externalID = 0;
+            // FIXME: why externalID needed?
+            // var externalID = 0;
+            var externalID = _item.id;
             for (i = episode; i < _item.seasons[season].episodes.length; i++) {
                 if (_item.seasons[season].episodes[i].files.length != 0) {
                     var mItem = getItemForDtPlayer(_item, i, season, externalID);
                     mediaItems.push(mItem);
-                    externalID++;
+                    // externalID++;
                     if (!settings.userAutoPlayOption.id) {
                         break;
+                    }
+                    if (numberItems) {
+                        if (numberItems == mediaItems.length) { break };
+                    }
+                }
+            }
+
+            // if play next season, add next seasons to playlist too
+            if (settings.playNextSeason && settings.playNextSeason.id) {
+                for (j = season + 1; j < _item.seasons.length; j++) {
+                    for (i = 0; i < _item.seasons[j].episodes.length; i++) {
+                        if (_item.seasons[j].episodes[i].files.length != 0) {
+                            var mItem = getItemForDtPlayer(_item, i, j, externalID);
+                            mediaItems.push(mItem);
+                            // externalID++;
+                            if (numberItems) {
+                                if (numberItems == mediaItems.length) { break };
+                            }
+                        }
                     }
                     if (numberItems) {
                         if (numberItems == mediaItems.length) { break };
