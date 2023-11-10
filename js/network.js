@@ -49,7 +49,7 @@ var Network = (function() {
                 } else if (status == 200) {
                     var result = xhr.responseText ? JSON.parse(xhr.responseText) : xhr;
 
-                    if (xhr.responseText && typeof result.error !== 'undefined') {
+                    if (xhr.responseText && result && typeof result.error !== 'undefined') {
                         retryRequests.push({'options' : options, 'callback' : callback})
                         Ajax.abortAll();
                         showErrorMessage(result.error)
