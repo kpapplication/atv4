@@ -4,7 +4,7 @@ var AfterLoad = (function() {
 
     return {
         get() {
-            var runOptions = AppStorage.getItem(KEY);
+            var runOptions = localStorage.getItem(KEY);
             if (runOptions) {
                 runAfterLoad = JSON.parse(runOptions);
                 AfterLoad.remove();
@@ -15,14 +15,14 @@ var AfterLoad = (function() {
         },
         save() {
             if (_options) {
-                AppStorage.setItem(KEY, JSON.stringify(_options));
+                localStorage.setItem(KEY, JSON.stringify(_options));
             }
         },
         clear() {
             _options = undefined;
         },
         remove() {
-            AppStorage.removeItem(KEY);
+            localStorage.removeItem(KEY);
         }
     }
 }());
