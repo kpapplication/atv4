@@ -18,6 +18,7 @@ var Ajax = (function() {
         method = (method == "POST") ? "POST" : "GET";
 
         var xhr = new XMLHttpRequest();
+        xhr.timeout = 10000;
         requests.push(xhr);
         var sep = (url.indexOf("?") == -1) ? "?" : "&";
         var postBody = (method == "POST") ? JSON.stringify(bParams) : null;
