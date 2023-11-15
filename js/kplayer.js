@@ -245,12 +245,12 @@ var KPlayer = (function() {
             var settings = AppSettings.getAll();
 
             try {
-                if (!settings.saveSubtitleSource.id) {
+                if (settings.saveSubtitleSource && !settings.saveSubtitleSource.id) {
                     console.log('Remove subtitle sources')
                     AppStorage.setData('selectedSubtitleSource', '{"subtitle": {}}')
                 }
 
-                if (!settings.saveAudioSource.id) {
+                if (settings.saveAudioSource && !settings.saveAudioSource.id) {
                     console.log('Remove audio sources')
                     AppStorage.setData('selectedAudioSource', '{"audio": {}}')
                 }
