@@ -243,6 +243,21 @@ var KPlayer = (function() {
     return {
         play(episode, season, shuffle, numberItems) {
             var settings = AppSettings.getAll();
+
+            try {
+                if (!settings.saveSubtitleSource.id) {
+                    console.log('Remove subtitle sources')
+                    AppStorage.setData('selectedSubtitleSource', '{"subtitle": {}}')
+                }
+
+                if (!settings.saveAudioSource.id) {
+                    console.log('Remove audio sources')
+                    AppStorage.setData('selectedAudioSource', '{"audio": {}}')
+                }
+            } catch (e) {
+                // ignore
+            }
+
             isPlaying = true;
             KP.stopUberTrailer();
             var result = cachedResult;

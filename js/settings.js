@@ -9,6 +9,8 @@ var AppSettings = (function() {
         [settingKeys.userAutoPlayOption]: yesNo,
         [settingKeys.showTimeContinueAlert]: yesNo,
         [settingKeys.playNextSeason]: yesNo,
+        [settingKeys.saveSubtitleSource]: yesNo,
+        [settingKeys.saveAudioSource]: yesNo,
         [settingKeys.showRatingStroke]: yesNo,
         [settingKeys.userTopShelfOption]: topShelfOptions,
         [settingKeys.backgroundUpdateTopShelf]: yesNo,
@@ -42,8 +44,14 @@ var AppSettings = (function() {
         //[settingKeys.uberStrokeAutoTrailer]: yesNo[0]
     }
 
+    const defaultsMicro6 = {
+        [settingKeys.saveSubtitleSource]: yesNo[1],
+        [settingKeys.saveAudioSource]: yesNo[1],
+    }
+
     const defaults = (function() {
-        return (parseInt(Device.systemVersion) >= 13) ? Object.assign({}, defaults12, defaults13) : defaults12;
+        const val = (parseInt(Device.systemVersion) >= 13) ? Object.assign({}, defaults12, defaults13) : defaults12;
+        return Device.appIdentifier.includes('octavian') && Device.appVersion >= 6 ? Object.assign(val, defaultsMicro6) : val;
     }());
 
     function checkKeyValidity(key) {
