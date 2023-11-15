@@ -128,8 +128,14 @@ const settingKeys13 = {
     //uberStrokeAutoTrailer: 'uberStrokeAutoTrailer'
 }
 
+const settingKeysMicro6 = {
+    saveSubtitleSource: 'saveSubtitleSource',
+    saveAudioSource: 'saveAudioSource',
+}
+
 const settingKeys = (function() {
-    return (parseInt(Device.systemVersion) >= 13) ? Object.assign({}, settingKeys12, settingKeys13) : settingKeys12;
+    const val = (parseInt(Device.systemVersion) >= 13) ? Object.assign({}, settingKeys12, settingKeys13) : settingKeys12;
+    return Device.appIdentifier.includes('octavian') && Device.appVersion >= 6 ? Object.assign(val, settingKeysMicro6) : val;
 }());
 
 const referencesType = {
