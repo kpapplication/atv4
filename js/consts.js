@@ -113,8 +113,6 @@ const settingKeys12 = {
     userAutoPlayOption: 'userAutoPlayOption',
     showTimeContinueAlert: 'showTimeContinueAlert',
     playNextSeason: 'playNextSeason',
-    saveSubtitleSource: 'saveSubtitleSource',
-    saveAudioSource: 'saveAudioSource',
     showRatingStroke: 'showRatingStroke',
     userTopShelfOption: 'userTopShelfOption',
     backgroundUpdateTopShelf: 'backgroundUpdateTopShelf',
