@@ -20,7 +20,7 @@ var AppStorage = {
 
 	setItem: function(key, value) {
 		try {
-			localStorage.addItem(key, value);
+			localStorage.setItem(key, value);
 			return userDefaults.setData("localStorage_" + key, value);
 		} catch (e) {
 			console.log('Could not redefine set data for key', key, value, e);
