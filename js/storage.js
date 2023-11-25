@@ -3,21 +3,28 @@ var AppStorage = {
 		var localStorageValue = localStorage.getItem(key);
 		var userDefaultsValue = userDefaults.getData("localStorage_" + key);
 
-		if (!userDefaultsValue && localStorageValue) {
-			userDefaults.setData("localStorage_" + key, localStorageValue);
-		}
+		try {
+			if (!userDefaultsValue && localStorageValue) {
+				userDefaults.setData("localStorage_" + key, localStorageValue);
+			}
 
-		if (!localStorageValue && userDefaultsValue) {
-			localStorage.setItem(key, userDefaultsValue);
+			if (!localStorageValue && userDefaultsValue) {
+				localStorage.setItem(key, userDefaultsValue);
+			}
+		} catch (e) {
+			console.log('Could not redefine storage data for key', key, value, e);
 		}
 
 		return userDefaultsValue || localStorageValue;
 	},
 
 	setItem: function(key, value) {
-		// double storage
-		localStorage.addItem(key, value);
-		return userDefaults.setData("localStorage_" + key, value);
+		try {
+			localStorage.addItem(key, value);
+			return userDefaults.setData("localStorage_" + key, value);
+		} catch (e) {
+			console.log('Could not redefine set data for key', key, value, e);
+		}
     },
 
 	removeItem: function(key) {
