@@ -4,20 +4,27 @@ var AppStorage = {
 		var userDefaultsValue = userDefaults.getData("localStorage_" + key);
 
 		if (!userDefaultsValue && localStorageValue) {
-			// migrate to userDefaults (temporary)
 			userDefaults.setData("localStorage_" + key, localStorageValue);
-			localStorage.removeItem(key);
+		}
+
+		if (!localStorageValue && userDefaultsValue) {
+			localStorage.setItem(key, userDefaultsValue);
 		}
 
 		return userDefaultsValue || localStorageValue;
 	},
 
 	setItem: function(key, value) {
-		// migrate to userDefaults (temporary)
-		localStorage.removeItem(key);
+		// double storage
+		localStorage.addItem(key, value);
 		return userDefaults.setData("localStorage_" + key, value);
     },
-    
+
+	removeItem: function(key) {
+		localStorage.removeItem(key)
+		return userDefaults.removeData("localStorage_" + key);
+	},
+
     getData: function(key) {
 		return userDefaults.getData(key);
 	},
@@ -29,10 +36,4 @@ var AppStorage = {
 	removeData: function(key) {
 		return userDefaults.removeData(key);
 	},
-	
-	removeItem: function(key) {
-		// migrate to userDefaults (temporary)
-		localStorage.removeItem(key)
-		return userDefaults.removeData(key);
-	}
 }
