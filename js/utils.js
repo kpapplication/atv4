@@ -141,6 +141,12 @@ var Utils = {
             return url;
         }
         if (url && typeof url === 'string') {
+            if (KINOPUB.replaceApiCdn) {
+                const urlWithoutProtocol = url.replace(/^https?:\/\//, '');
+                const urlPath = urlWithoutProtocol.split('/').slice(1).join('/');
+                return KINOPUB.cdnUrl + '/' + urlPath;
+            }
+
             return url.replace(KINOPUB.oldCdnUrl, KINOPUB.cdnUrl);
         }
 
