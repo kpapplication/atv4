@@ -37,6 +37,7 @@ var AppStorage = {
 	},
 
 	setData: function(key, value) {
+		console.log(key, value);
 		return userDefaults.setData(key, value);
 	},
 

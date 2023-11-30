@@ -247,11 +247,13 @@ var KPlayer = (function() {
             try {
                 if (settings.saveSubtitleSource && !settings.saveSubtitleSource.id) {
                     console.log('Remove subtitle sources')
+                    AppStorage.setData('selectedSubtitleSource', '')
                     AppStorage.setData('selectedSubtitleSource', '{"subtitle": {}}')
                 }
 
                 if (settings.saveAudioSource && !settings.saveAudioSource.id) {
                     console.log('Remove audio sources')
+                    AppStorage.setData('selectedAudioSource', '')
                     AppStorage.setData('selectedAudioSource', '{"audio": {}}')
                 }
             } catch (e) {

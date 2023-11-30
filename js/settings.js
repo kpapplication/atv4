@@ -51,7 +51,7 @@ var AppSettings = (function() {
 
     const defaults = (function() {
         const val = (parseInt(Device.systemVersion) >= 13) ? Object.assign({}, defaults12, defaults13) : defaults12;
-        return Device.appIdentifier.includes('octavian') && Device.appVersion >= 6 ? Object.assign(val, defaultsMicro6) : val;
+        return (Device.appIdentifier.includes('octavian') && Device.appVersion >= 6) || (Device.appIdentifier.includes('qinoa') && Device.appVersion >= 25) ? Object.assign(val, defaultsMicro6) : val;
     }());
 
     function checkKeyValidity(key) {

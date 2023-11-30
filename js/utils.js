@@ -112,7 +112,8 @@ var Utils = {
         if (Device.appIdentifier.includes('kozlov')) { name = 'EasyTV' }
         if (Device.appIdentifier.includes('morozov')) { name = 'Tiny IPTV' }
         if (Device.appIdentifier.includes('octavian')) { name = 'Micro IPTV' }
-        if (Device.appIdentifier.includes('qello')) { rname = 'Qello' }
+        if (Device.appIdentifier.includes('qello')) { name = 'Qello' }
+        if (Device.appIdentifier.includes('qinoa')) { name = 'Qinoa' }
         name += ' ' + Device.appVersion;
         return name;
     },

@@ -315,6 +315,8 @@ var Templates = {
 
         var selectedBoot = selectedBootUrl == bootUrl ? 'Да' : 'Нет';
 
+        var isQinoa = Device.appIdentifier.includes('qinoa');
+
         return `<document>
                     <head>
                         <style>
@@ -388,7 +390,7 @@ var Templates = {
                                         </lockup>
                                     </relatedContent>
                                 </listItemLockup>
-                                <listItemLockup onselect="KP.toggleDefaultBootUrl()">
+                                ${!isQinoa ? `<listItemLockup onselect="KP.toggleDefaultBootUrl()">
                                     <title>Открывать приложение автоматически</title>
                                     <decorationLabel id="defaultBootUrl">${selectedBoot}</decorationLabel>
                                     <relatedContent>
@@ -397,7 +399,7 @@ var Templates = {
                                             <description style="tv-text-max-lines: 15;">\nВключите, если вы хотите открывать плейлист автоматически при запуске приложения. Данная настройка ничего не делает в старых приложениях</description>
                                         </lockup>
                                     </relatedContent>
-                                </listItemLockup>
+                                </listItemLockup>` : ''}
                                 <listItemLockup>
                                     <title>Версия ${APP_VERSION}</title>
                                     <relatedContent>
