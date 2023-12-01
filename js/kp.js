@@ -120,7 +120,7 @@ var KP = (function() {
                     topshelfArrayCount++;
                     var topshelfMovie = {};
                     topshelfMovie["slug"] = item.type + ";items/" + item.id.toString();
-                    topshelfMovie["image"] = item.posters.big;
+                    topshelfMovie["image"] = Utils.replaceCdn(item.posters.big);
                     topshelfMovie["title"] = item.title.split(' / ')[0];
                     return topshelfMovie;
                 }
