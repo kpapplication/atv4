@@ -188,8 +188,13 @@ var KPlayer = (function() {
             }
         } else if (item.subtype == 'multi') {
             console.log('multi');
-            var episode = episode || item.videos.findIndex(video => video.watching.status < 1);
+            console.log('requested episode: ' + episode)
+            var episode = typeof episode === 'number' ? episode : item.videos.findIndex(video => video.watching.status < 1);
             if (episode == -1) { episode = 0; }
+            if (!item.videos[episode]) {
+                episode = item.videos.findIndex(video => video.watching.status < 1);
+            }
+            console.log('selected episode: ' + episode)
             var externalID = 0;
             for (i = episode; i < item.videos.length; i++) {
                 if (item.videos[i].files) {
