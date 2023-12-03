@@ -15,14 +15,14 @@ const KEYS = {
 }
 
 const KINOPUB = {
-    apiBase: "https://kpserver.link/api/v1/",
-    apiAuth: "https://kpserver.link/api/oauth2/",
+    apiBase: "https://proxykp.xyz/api/v1/",
+    apiAuth: "https://proxykp.xyz/api/oauth2/",
     apiBaseExt: "https://kinopub.link/v1.1/",
-    apiBaseExt2: "https://kpserver.link/api2/v1.1/",
-    actorImgUrl: "https://kpserver.link/cdn/actors/",
+    apiBaseExt2: "https://proxykp.xyz/api2/v1.1/",
+    actorImgUrl: "https://proxykp.xyz/cdn/actors/",
     oldCdnUrl: 'https://cdn.service-kp.com/',
-    cdnUrl: "https://kpserver.link/cdn/",
-    replaceApiCdn: true,
+    cdnUrl: "https://proxykp.xyz/cdn/",
+    replaceApiCdn: false,
     clientID: "appletv2",
     clientSecret: "3z5124kj5liqy9gahnjr07qpj65ferl2"
 }
