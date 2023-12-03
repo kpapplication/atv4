@@ -22,7 +22,7 @@ const KINOPUB = {
     actorImgUrl: "https://proxykp.xyz/cdn/actors/",
     oldCdnUrl: 'https://cdn.service-kp.com/',
     cdnUrl: "https://proxykp.xyz/cdn/",
-    replaceApiCdn: false,
+    replaceApiCdn: true,
     clientID: "appletv2",
     clientSecret: "3z5124kj5liqy9gahnjr07qpj65ferl2"
 }
