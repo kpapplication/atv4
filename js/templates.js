@@ -1067,8 +1067,8 @@ var MovieTemplates = {
                                             <description handlesOverflow="true" onselect="showText('${plot}', '${titles.title}')" class="banner-center" style="tv-text-max-lines: 3; text-align: left; text-shadow: 2px 2px 2px 2px #000000; width: 900">${plot}</description>
                                             <row id="badges" class="banner-center" style="margin-top: 10; tv-interitem-spacing: 20">
                                                 <text class="metadata-text">${result.item.year}</text>
-                                                <text class="metadata-text">${result.item.countries[0].title}</text>
-                                                <text class="metadata-text">${result.item.genres[0].title}</text>
+                                                <text class="metadata-text">${result.item.countries[0] ? result.item.countries[0].title : '-'}</text>
+                                                <text class="metadata-text">${result.item.genres[0] ? result.item.genres[0].title : '-'}</text>
                                                 <text class="metadata-text">${duration}</text>
                                                 ${hd}${cc}${ac3}${ad}${quality}${finished}
                                             </row>
@@ -1084,8 +1084,8 @@ var MovieTemplates = {
                                         ${subtitle}
                                         <row id="badges">
                                             <text>${result.item.year}</text>
-                                            <text>${result.item.countries[0].title}</text>
-                                            <text>${result.item.genres[0].title}</text>
+                                            <text>${result.item.countries[0] ? result.item.countries[0].title : '-'}</text>
+                                            <text>${result.item.genres[0] ? result.item.genres[0].title : '-'}</text>
                                             <text>${duration}</text>
                                             ${hd}${cc}${ac3}${ad}${quality}${finished}
                                         </row>
