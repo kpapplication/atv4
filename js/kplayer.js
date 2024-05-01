@@ -43,6 +43,8 @@ var KPlayer = (function() {
             videoUrl += '&ac3default=1';
         }
 
+        videoUrl = Utils.replacePlaylist(videoUrl);
+
         var mItem = {
             "id": Number(item.id),
             "imdb": Number(item.imdb),
@@ -79,7 +81,7 @@ var KPlayer = (function() {
             mItem.playlist = {
                 quality: video.files[resolutionIndex].quality || "Auto",
                 items: {
-                    "Auto": [{ name: "Auto", url: video.files[0].url.hls4, adaptive: true }],
+                    "Auto": [{ name: "Auto", url: Utils.replacePlaylist(video.files[0].url.hls4), adaptive: true }],
                 },
             }
 
@@ -99,7 +101,7 @@ var KPlayer = (function() {
 
                     return {
                         name: `${('0' + audio.index).slice(-2)}. ${titleParts.join('. ')}${lang}${ac3}`,
-                        url: file.url.hls.replace('a1.m3u8', `a${audio.index}.m3u8`),
+                        url: Utils.replacePlaylist(file.url.hls.replace('a1.m3u8', `a${audio.index}.m3u8`)),
                         adaptive: false,
                     };
                 })
@@ -186,6 +188,8 @@ var KPlayer = (function() {
                     }
                 }
             }
+
+            console.log(mediaItems);
         } else if (item.subtype == 'multi') {
             console.log('multi');
             console.log('requested episode: ' + episode)

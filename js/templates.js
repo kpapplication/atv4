@@ -1130,7 +1130,7 @@ var MovieTemplates = {
                                                 <text id="age">-</text>
                                             </info>
                                             <info>
-                                                <header><title>Добален</title></header>
+                                                <header><title>Добавлен</title></header>
                                                 <text>${Utils.rusDate(result.item.created_at * 1000, { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' })}</text>
                                             </info>
                                             <info>

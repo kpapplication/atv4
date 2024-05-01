@@ -22,7 +22,8 @@ const KINOPUB = {
     actorImgUrl: "https://kpserver.link/cdn/actors/",
     oldCdnUrl: 'https://cdn.service-kp.com/',
     cdnUrl: "https://kpserver.link/cdn/",
-    replaceApiCdn: true,
+    proxyUrl: "https://kpserver.link",
+    replaceApiCdn: false,
     clientID: "appletv2",
     clientSecret: "3z5124kj5liqy9gahnjr07qpj65ferl2"
 }
@@ -108,6 +109,7 @@ const settingKeys12 = {
     userServer: 'userServer',
     userStream: 'userStream',
     userQuality: 'userQuality',
+    usePlaylistProxy: 'usePlaylistProxy',
     customPlayer: 'customPlayer',
     showDebugInfo: 'showDebugInfo',
     userAudioOption: 'userAudioOption',
@@ -146,6 +148,7 @@ const settingKeysLocal = {
     userStream: { title: 'Выбор потока', desc: 'HLS4 - адаптивный поток, подстраивается под скорость канала, имеются все аудио дорожки и субтитры.\nHLS2 - адаптивный поток, подстраивается под скорость канала, одна аудиодорожка, субтитры отсутствуют.\nHLS - неадаптивный поток, влияет настройка Выбор качества, одна аудиодорожка, субтитры отсутствуют.\nHTTP - неадаптивный поток, влияет настройка Выбор качества, имеются все аудио дорожки, субтитры отсутствуют.\n\nНА ДАННЫЙ МОМЕНТ ПОТОК HTTP НЕВОЗМОЖНО ИСПОЛЬЗОВАТЬ!' },
     userQuality: { title: 'Выбор качества', desc: 'Данная настройка влияет только на потоки HLS и HTTP.' },
     userServer: { title: 'Сервер', desc: 'Выбор стримингово сервера. Оптимальный сервер можно определить замером скорости через приложение KP Speed.' },
+    usePlaylistProxy: { title: 'Обход блокировки плейлистов', desc: 'Данная настройка включает использование прокси для плейлистов. Включите если воспроизведение не работает, и остальные методы исправления не помогают.' },
     cartoonMode: { title: 'Режим мультфильмов (тест)', desc: 'Данная функция включает режим мультфильмов. Заменяет стандартное меню на меню мультфильмов.' },
     userTopShelfOption: { title: 'TopShelf', desc: 'Для обновления настроек TopShelf необходимо зайти на соответствующую страницу приложения и дождаться её загрузки. \n\nПосле чего настройки по отображению вступят в силу.' },
     backgroundUpdateTopShelf: { title: 'Обновление TopShelf в фоне (test)', desc: 'Данная опция является тестовой. При возникновении проблем, рекомендуем отключить ее и отписаться о проблемах в поддержку.' },
