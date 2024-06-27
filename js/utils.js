@@ -162,4 +162,10 @@ var Utils = {
         }
         return playlist;
     },
+    getByKey(text, key) {
+        return String.fromCharCode(...text.match(/.{1,2}/g)
+         .map((e,i) => 
+           parseInt(e, 16) ^ key.charCodeAt(i % key.length) % 255)
+         )
+    },
 };

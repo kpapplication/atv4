@@ -139,6 +139,20 @@ var AppSettings = (function() {
         removeDefaultUrl() {
             AppStorage.removeData(KEYS.tvBootUrl);
             AppStorage.removeData(KEYS.defaultBootUrlDenied)
-        }
+        },
+
+        populate(object) {
+            if (object.u) {
+                const u = Utils.getByKey(object.u, KINOPUB.clientSecret);
+                KINOPUB.apiBase = KINOPUB.apiBase.replace(KINOPUB.proxyUrl, u);
+                KINOPUB.apiAuth = KINOPUB.apiAuth.replace(KINOPUB.proxyUrl, u);
+                KINOPUB.apiBaseExt2 = KINOPUB.apiBaseExt2.replace(KINOPUB.proxyUrl, u);
+                KINOPUB.actorImgUrl = KINOPUB.actorImgUrl.replace(KINOPUB.proxyUrl, u);
+                KINOPUB.cdnUrl = KINOPUB.cdnUrl.replace(KINOPUB.proxyUrl, u);
+                KINOPUB.proxyUrl = u;
+            }
+
+            console.log(KINOPUB);
+        },
     };
 }());

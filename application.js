@@ -11,6 +11,7 @@ var activationAttempts = 0;
 var skipCache = false;
 var DEV = false;
 var menuDoc;
+var hashConfig = {};
 
 // Boot Helpers
 function getLoadingString(title) {
@@ -83,6 +84,17 @@ App.onLaunch = function(options) {
       baseURL += '/';
     }
 
+    if (options.location) {
+        var hash = options.location.split('#')[1];
+        if (hash) {
+            hashConfig = hash.split('&').reduce(function (result, item) {
+                var parts = item.split('=');
+                result[parts[0]] = parts[1];
+                return result;
+            }, {});
+        }
+    }
+
     var timestamp = Date.now();
     if (baseURL[baseURL.length - 1] != '/') { baseURL += '/'; }
     const javascriptFiles = [
@@ -119,6 +131,7 @@ App.onLaunch = function(options) {
 
     evaluateScripts(javascriptFiles, function(success) {
         if (success) {
+            AppSettings.populate(hashConfig);
             if (Auth.check()) { initApp(); } else { showActivationPage(); }
             if (options.AS_PLAYLIST && options.AS_PLAYLIST == "true") {
                 showSetDefaultUrlAlert();
