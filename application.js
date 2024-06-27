@@ -132,6 +132,7 @@ App.onLaunch = function(options) {
     evaluateScripts(javascriptFiles, function(success) {
         if (success) {
             AppSettings.populate(hashConfig);
+            API.update();
             if (Auth.check()) { initApp(); } else { showActivationPage(); }
             if (options.AS_PLAYLIST && options.AS_PLAYLIST == "true") {
                 showSetDefaultUrlAlert();

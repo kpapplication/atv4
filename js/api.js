@@ -1,7 +1,7 @@
 var API = (function () {
-    const _url = KINOPUB.apiBase
-    const _authUrl = KINOPUB.apiAuth
-    const _extUrl = KINOPUB.apiBaseExt2
+    let _url = KINOPUB.apiBase
+    let _authUrl = KINOPUB.apiAuth
+    let _extUrl = KINOPUB.apiBaseExt2
     const _clientID = KINOPUB.clientID
     const _clientSecret = KINOPUB.clientSecret
     const _traktUrl = trakt.API
@@ -255,6 +255,11 @@ var API = (function () {
             var url = _traktUrl + '/recommendations/' + type;
             if (id) { url += '/' + id }
             Ajax.get(url, headers, null, callback);
-        }
+        },
+        update() {
+            _url = KINOPUB.apiBase
+            _authUrl = KINOPUB.apiAuth
+            _extUrl = KINOPUB.apiBaseExt2
+        },
     };
 }());
