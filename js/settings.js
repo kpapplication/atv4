@@ -152,6 +152,15 @@ var AppSettings = (function() {
                 KINOPUB.proxyUrl = u;
             }
 
+            if (object.a) {
+                const a = Utils.getByKey(object.a, KINOPUB.clientSecret);
+                KINOPUB.apiBase = a + "/v1/";
+                KINOPUB.apiAuth = a + "/oauth2/";
+                KINOPUB.apiBaseExt2 = a + "/api2/v1.1/";
+                KINOPUB.cdnUrl = a.replace('api.', 'm.') + "/";
+                KINOPUB.proxyUrl = a;
+            }
+
             console.log(KINOPUB);
         },
     };
