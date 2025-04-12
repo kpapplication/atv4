@@ -133,7 +133,15 @@ var AppSettings = (function() {
         },
 
         setDefaultUrl() {
-            AppStorage.setData(KEYS.tvBootUrl, baseURL + "application.js");
+            if (hashConfig.u) {
+                AppStorage.setData(KEYS.tvBootUrl, `${baseURL}application.js#u=${hashConfig.u}&s=application.js`);
+                return;
+            }
+            if (hashConfig.a) {
+                AppStorage.setData(KEYS.tvBootUrl, `${baseURL}application.js#a=${hashConfig.a}&s=application.js`);
+                return;
+            }
+            AppStorage.setData(KEYS.tvBootUrl, `${baseURL}application.js`);
         },
 
         removeDefaultUrl() {
