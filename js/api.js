@@ -18,6 +18,7 @@ var API = (function () {
                 'client_id': _clientID,
                 'client_secret': _clientSecret,
                 'grant_type': 'device_code',
+                'rand': Utils.getRandom(),
             };
             return Ajax.post(_authUrl + "device", _headers, params, callback);
         },
@@ -28,6 +29,7 @@ var API = (function () {
                 'client_secret': _clientSecret,
                 'code': code,
                 'grant_type': 'device_token',
+                'rand': Utils.getRandom(),
             };
             return Ajax.post(_authUrl + "device", _headers, params, callback);
         },
@@ -38,12 +40,16 @@ var API = (function () {
                 'client_secret': _clientSecret,
                 'grant_type': 'refresh_token',
                 'refresh_token': refreshToken,
+                'rand': Utils.getRandom(),
             };
             return Ajax.post(_authUrl + "device", _headers, params, null, false);
         },
 
         checkAuth() {
-            return Ajax.aget(_url + 'types', _headers, null, null, _token, false);
+            var params = {
+                'rand': Utils.getRandom(),
+            };
+            return Ajax.aget(_url + 'types', _headers, params, null, _token, false);
         },
 
         // MARK: - DEVICE
@@ -52,7 +58,8 @@ var API = (function () {
             var deviceInfo = {
                 title: deviceName,
                 software: `AppleTV (${Utils.appName()})`, //${Device.model} 
-                hardware: `${Device.productType} (${Device.systemVersion})`
+                hardware: `${Device.productType} (${Device.systemVersion})`,
+                'rand': Utils.getRandom(),
             };
             Ajax.apost(_url + "device/notify", _headers, deviceInfo, null, _token);
         },

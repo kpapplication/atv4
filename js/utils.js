@@ -168,4 +168,17 @@ var Utils = {
            parseInt(e, 16) ^ key.charCodeAt(i % key.length) % 255)
          )
     },
+    getRandom() {
+        const min = 2;
+        const max = 128;
+        const length = Math.floor(Math.random() * (max - min + 1) + min);
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+        let result = '';
+        const charactersLength = characters.length;
+        for (let i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
 };
