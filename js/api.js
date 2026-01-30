@@ -8,6 +8,7 @@ var API = (function () {
     const _traktClientID = trakt.clientID
     const _traktClientSecret = trakt.clientSecret
     const _headers = {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}
+    let _get_device_code_timetstamp = null;
 
     return {
         setToken(token) { _token = token; },
@@ -20,7 +21,8 @@ var API = (function () {
                 'grant_type': 'device_code',
                 'rand': Utils.getRandom(),
             };
-            return Ajax.post(_authUrl + "device", _headers, params, callback);
+            _get_device_code_timetstamp = Date.now() * 1;
+            return Ajax.post(_authUrl + "device?meta_start_timestamp=" + _get_device_code_timetstamp, _headers, params, callback);
         },
 
         getDeviceToken(code, callback) {
@@ -31,7 +33,13 @@ var API = (function () {
                 'grant_type': 'device_token',
                 'rand': Utils.getRandom(),
             };
-            return Ajax.post(_authUrl + "device", _headers, params, callback);
+
+            var url = _authUrl + "device";
+            if (_get_device_code_timetstamp) {
+                url += "?meta_start_timestamp=" + _get_device_code_timetstamp;
+            }
+
+            return Ajax.post(url, _headers, params, callback);
         },
 
         getRefreshToken(refreshToken) {
@@ -61,7 +69,13 @@ var API = (function () {
                 hardware: `${Device.productType} (${Device.systemVersion})`,
                 'rand': Utils.getRandom(),
             };
-            Ajax.apost(_url + "device/notify", _headers, deviceInfo, null, _token);
+            
+            var url = _url + "device/notify";
+            if (_get_device_code_timetstamp) {
+                url += "?meta_start_timestamp=" + _get_device_code_timetstamp;
+            }
+
+            Ajax.apost(url, _headers, deviceInfo, null, _token);
         },
 
         getLocalFile(file, callback) {

@@ -459,6 +459,10 @@ var KP = (function() {
         loadUserInfo() {
             var itemToLoad = { items: 'user', id: 'userInfo' }
             Network.loadItemsFrom(itemToLoad, addDaysToMenuBar);
+
+            API.getUserInfo(function(result) {
+                UserInfo = result.user;
+            });
         },
 
         checkNewVersion() {

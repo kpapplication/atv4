@@ -80,6 +80,11 @@ var Ajax = (function() {
         return url + sep + "access_token=" + token;
     }
 
+    function appendUsername(url, username) {
+        var sep = (url.indexOf("?") == -1) ? "?" : "&";
+        return url + sep + "meta_username=" + username;
+    }
+
     return {
         get: function(url, headers, params, callback, async) {
             return _query("GET", url, headers, params, null, callback, async);
@@ -91,15 +96,24 @@ var Ajax = (function() {
 
         aget: function(url, headers, params, callback, token, async) {
             url = appendToken(url, token);
+            if (typeof UserInfo !== "undefined" && UserInfo.username) {
+                url = appendUsername(url, UserInfo.username);
+            }
             return Ajax.get(url, headers, params, callback, async);
         },
 
         apost: function(url, headers, params, callback, token, async) {
             url = appendToken(url, token);
+            if (typeof UserInfo !== "undefined" && UserInfo.username) {
+                url = appendUsername(url, UserInfo.username);
+            }
             return Ajax.post(url, headers, params, callback, async);
         },
         apostInUrl: function(url, headers, params, callback, token, async) {
             url = appendToken(url, token);
+            if (typeof UserInfo !== "undefined" && UserInfo.username) {
+                url = appendUsername(url, UserInfo.username);
+            }
             return _query("POST", url, headers, params, params, callback, async, true);
         },
         abortAll: function() {

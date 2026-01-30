@@ -1,3 +1,5 @@
+var UserInfo;
+
 var Auth = (function() {
 	function refreshToken() {
 		var refreshToken = AppStorage.getItem(KEYS.refreshToken);
