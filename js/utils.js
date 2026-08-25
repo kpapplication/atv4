@@ -154,12 +154,12 @@ var Utils = {
         return url;
     },
     replacePlaylist(playlist) {
-        const usePlaylistProxy = AppSettings.get('usePlaylistProxy');
-        if (usePlaylistProxy && usePlaylistProxy.id) {
-            const proxied = playlist.replace(/(https:\/\/[^\/]+\/hls)/, `${KINOPUB.proxyUrl}/hls`);
-            console.log('Proxy URL: ' + proxied);
-            return proxied;
-        }
+        // const usePlaylistProxy = AppSettings.get('usePlaylistProxy');
+        // if (usePlaylistProxy && usePlaylistProxy.id) {
+        //     const proxied = playlist.replace(/(https:\/\/[^\/]+\/hls)/, `${KINOPUB.proxyUrl}/hls`);
+        //     console.log('Proxy URL: ' + proxied);
+        //     return proxied;
+        // }
         return playlist;
     },
     getByKey(text, key) {

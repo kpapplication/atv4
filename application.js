@@ -1,5 +1,5 @@
 var baseURL;
-var APP_VERSION = "1.59.0";
+var APP_VERSION = "1.59.1";
 var MenuItemDoc;
 var cachedResult;
 var globalCheckAuthInterval;
@@ -79,6 +79,7 @@ function checkDEV() {
 
 // MARK: - APP
 App.onLaunch = function(options) {
+    console.log(options);
     baseURL = options.BASEURL;
     if (baseURL && !baseURL[baseURL.length - 1] !== "/") {
       baseURL += '/';

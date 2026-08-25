@@ -3,7 +3,7 @@ var Network = (function() {
     //var retryRequest
 
     function showError(xhr) {
-        var buttons = '<button onselect="Network.retry()"><text>Повторить</text></button>';
+        var buttons = '<button onselect="Network.retry()"><text>Повторить</text></button><button onselect="globalClearStorage()"><text>Сбросить приложение</text></button>';
         var desc = '';
         console.log(xhr)
         if (xhr.status == 502) { desc = 'Сервис временно не доступен.\n' }
@@ -16,7 +16,7 @@ var Network = (function() {
     }
 
     function showErrorMessage(message) {
-        var buttons = '<button onselect="Network.retry()"><text>Повторить</text></button>';
+        var buttons = '<button onselect="Network.retry()"><text>Повторить</text></button><button onselect="globalClearStorage()"><text>Сбросить приложение</text></button>';
         var desc = message;
         console.log(desc)
         var template = Templates.alert("Ошибка", desc, buttons);

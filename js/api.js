@@ -281,6 +281,7 @@ var API = (function () {
             _url = KINOPUB.apiBase
             _authUrl = KINOPUB.apiAuth
             _extUrl = KINOPUB.apiBaseExt2
+            console.log(_url, _authUrl, _extUrl)
         },
     };
 }());

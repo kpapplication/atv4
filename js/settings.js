@@ -1,9 +1,9 @@
-var AppSettings = (function() {
+var AppSettings = (function () {
     const values = {
         [settingKeys.userServer]: null,
         [settingKeys.userStream]: null,
         [settingKeys.userQuality]: quality,
-        [settingKeys.usePlaylistProxy]: yesNo,
+        // [settingKeys.usePlaylistProxy]: yesNo,
         [settingKeys.customPlayer]: yesNo,
         [settingKeys.showDebugInfo]: yesNo,
         [settingKeys.userAudioOption]: yesNo,
@@ -26,7 +26,7 @@ var AppSettings = (function() {
         [settingKeys.userServer]: null,
         [settingKeys.userStream]: null,
         [settingKeys.userQuality]: quality.bestResolution,
-        [settingKeys.usePlaylistProxy]: yesNo[0],
+        // [settingKeys.usePlaylistProxy]: yesNo[0],
         [settingKeys.customPlayer]: yesNo[1],
         [settingKeys.showDebugInfo]: yesNo[0],
         [settingKeys.userAudioOption]: yesNo[1],
@@ -51,7 +51,7 @@ var AppSettings = (function() {
         [settingKeys.saveAudioSource]: yesNo[1],
     }
 
-    const defaults = (function() {
+    const defaults = (function () {
         const val = (parseInt(Device.systemVersion) >= 13) ? Object.assign({}, defaults12, defaults13) : defaults12;
         return (Device.appIdentifier.includes('octavian') && Device.appVersion >= 6) || (Device.appIdentifier.includes('qinoa') && Device.appVersion >= 25) ? Object.assign(val, defaultsMicro6) : val;
     }());
@@ -116,7 +116,7 @@ var AppSettings = (function() {
         },
 
         getAll() {
-            return {...settings };
+            return { ...settings };
         },
 
         setAllValues(key, _values) {
@@ -134,14 +134,14 @@ var AppSettings = (function() {
 
         setDefaultUrl() {
             if (hashConfig.u) {
-                AppStorage.setData(KEYS.tvBootUrl, `${baseURL}application.js#u=${hashConfig.u}&s=application.js`);
+                AppStorage.setData(KEYS.tvBootUrl, `${baseURL}bundle.js#u=${hashConfig.u}&s=application.js`);
                 return;
             }
             if (hashConfig.a) {
-                AppStorage.setData(KEYS.tvBootUrl, `${baseURL}application.js#a=${hashConfig.a}&s=application.js`);
+                AppStorage.setData(KEYS.tvBootUrl, `${baseURL}bundle.js#a=${hashConfig.a}&s=application.js`);
                 return;
             }
-            AppStorage.setData(KEYS.tvBootUrl, `${baseURL}application.js`);
+            AppStorage.setData(KEYS.tvBootUrl, `${baseURL}bundle.js`);
         },
 
         removeDefaultUrl() {
@@ -150,6 +150,30 @@ var AppSettings = (function() {
         },
 
         populate(object) {
+            if (process.env.API_ENCODED) {
+                const a = Utils.getByKey(process.env.API_ENCODED, KINOPUB.clientSecret);
+                KINOPUB.apiBase = a + "/v1/";
+                KINOPUB.apiAuth = a + "/oauth2/";
+                KINOPUB.apiBaseExt2 = a + "/api2/v1.1/";
+                KINOPUB.cdnUrl = a.replace('api.', 'm.') + "/";
+                KINOPUB.proxyUrl = a;
+            }
+
+            if (process.env.API_LEGACY_ENCODED) {
+                const u = Utils.getByKey(process.env.API_LEGACY_ENCODED, KINOPUB.clientSecret);
+                KINOPUB.apiBase = KINOPUB.apiBase.replace(KINOPUB.proxyUrl, u);
+                KINOPUB.apiAuth = KINOPUB.apiAuth.replace(KINOPUB.proxyUrl, u);
+                KINOPUB.apiBaseExt2 = KINOPUB.apiBaseExt2.replace(KINOPUB.proxyUrl, u);
+                KINOPUB.actorImgUrl = KINOPUB.actorImgUrl.replace(KINOPUB.proxyUrl, u);
+                KINOPUB.cdnUrl = KINOPUB.cdnUrl.replace(KINOPUB.proxyUrl, u);
+                KINOPUB.proxyUrl = u;
+            }
+
+            if (process.env.API_EXT2_LEGACY) {
+                const b = Utils.getByKey(process.env.API_EXT2_LEGACY, KINOPUB.clientSecret);
+                KINOPUB.apiBaseExt2 = b + "/api2/v1.1/";
+            }
+
             if (object.u) {
                 const u = Utils.getByKey(object.u, KINOPUB.clientSecret);
                 KINOPUB.apiBase = KINOPUB.apiBase.replace(KINOPUB.proxyUrl, u);
